@@ -144,7 +144,7 @@ class BST:
                     self._remove(current_node, current_node.right.val)
 
                 # either only one child or none
-                elif parent_node is None: # root node have no parent
+                elif parent_node is None:  # root node have no parent
                     # we're sure there is only one child or none
                     if current_node.left is not None:
                         # """
@@ -195,3 +195,52 @@ class BST:
         while current_node.left is not None:
             current_node = current_node.left
         return current_node.val
+
+    def find_closest_value(self, key):
+        if self.root is None:
+            return
+        if self.root.val == key:
+            return key
+        closest = float("inf")
+        current_node = self.root
+        """
+        |closest - key| < |current_node - key|
+        update closest based on this condition
+        """
+        while current_node is not None:
+            if current_node.val == key:
+                closest = current_node.val
+                break
+            if abs(closest - key) < abs(current_node.val - key):
+                continue
+            else:
+                closest = current_node.val
+            # go to left or right
+            if current_node.val < key:
+                # go to right
+                current_node = current_node.right
+            else:
+                current_node = current_node.left
+        return closest
+
+    def validate_bst(self):
+        if self.root is None:
+            return True
+        # root node's limit is -inf < root < inf
+        return self._validate_bst(self.root, float("-inf"), float("inf"))
+
+    def _validate_bst(self, node, min_val, max_val):
+        # leaf node or null tree
+        if node is None:
+            return True
+        # bst property
+        # node's value between min_val and max_val for wrapping
+        if node.val < min_val or node.val > max_val:
+            return False
+        # for left: max_val is root of x
+        # for right: min_val is root of x
+        # so when going left keep the min_val same update max_val to node val
+        # and when going right keep the max_val same and update min_val to node val
+        left_is_valid = self._validate_bst(node.left, min_val, node.val)
+        right_is_valid = self._validate_bst(node.right, node.val, max_val)
+        return left_is_valid and right_is_valid
