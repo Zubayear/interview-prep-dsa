@@ -9,6 +9,12 @@ def bst_data():
     return data
 
 
+@pytest.fixture()
+def traversal_data():
+    data = [6, 4, 9, 2, 5, 8, 12]
+    return data
+
+
 def test_insert(bst_data):
     bst = BST()
     for n in bst_data:
@@ -89,3 +95,45 @@ def test_validate_bst(bst_data):
     for n in bst_data:
         bst.insert_iter(n)
     assert bst.validate_bst() == True
+
+
+def test_inOrder_traversal(traversal_data):
+    bst = BST()
+    for n in traversal_data:
+        bst.insert_iter(n)
+    assert bst.inOrder_traversal(bst.root) == sorted(traversal_data)
+
+
+def test_preOrder_traversal(traversal_data):
+    bst = BST()
+    for n in traversal_data:
+        bst.insert_iter(n)
+    assert bst.preOrder_traversal(bst.root) == [6, 4, 2, 5, 9, 8, 12]
+
+
+def test_postOrder_traversal(traversal_data):
+    bst = BST()
+    for n in traversal_data:
+        bst.insert_iter(n)
+    assert bst.postOrder_traversal(bst.root) == [2, 5, 4, 8, 12, 9, 6]
+
+
+def test_inOrder_iterative(traversal_data):
+    bst = BST()
+    for n in traversal_data:
+        bst.insert_iter(n)
+    assert bst.inOrder_iterative(bst.root) == sorted(traversal_data)
+
+
+def test_preOrder_iterative(traversal_data):
+    bst = BST()
+    for n in traversal_data:
+        bst.insert_iter(n)
+    assert bst.preOrder_iterative(bst.root) == [6, 4, 2, 5, 9, 8, 12]
+
+
+def test_postOrder_iterative(traversal_data):
+    bst = BST()
+    for n in traversal_data:
+        bst.insert_iter(n)
+    assert bst.postOrder_iterative(bst.root) == [2, 5, 4, 8, 12, 9, 6]

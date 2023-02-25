@@ -10,6 +10,7 @@ class Node:
 class BST:
     def __init__(self):
         self.root = None
+        self.res = []
 
     def insert(self, key):
         if self.root is None:
@@ -106,12 +107,38 @@ class BST:
                 else:
                     current = current.right
 
-    def inorder_traversal(self, root):
+    def inOrder_traversal(self, root):
+        """
+        visit the left subtree, then the root node, and finally the right subtree.
+        """
         if root is None:
-            return
-        self.inorder_traversal(root.left)
-        print(root.val)
-        self.inorder_traversal(root.right)
+            return self.res
+        self.inOrder_traversal(root.left)
+        self.res.append(root.val)
+        self.inOrder_traversal(root.right)
+        return self.res
+
+    def preOrder_traversal(self, root):
+        """
+        visit the root node, then the left subtree, and finally the right subtree.
+        """
+        if root is None:
+            return self.res
+        self.res.append(root.val)
+        self.preOrder_traversal(root.left)
+        self.preOrder_traversal(root.right)
+        return self.res
+
+    def postOrder_traversal(self, root):
+        """
+        visit the left subtree, then the right subtree, and finally the root node
+        """
+        if root is None:
+            return self.res
+        self.postOrder_traversal(root.left)
+        self.postOrder_traversal(root.right)
+        self.res.append(root.val)
+        return self.res
 
     def remove(self, key):
         self._remove(self.root, key)
@@ -244,3 +271,88 @@ class BST:
         left_is_valid = self._validate_bst(node.left, min_val, node.val)
         right_is_valid = self._validate_bst(node.right, node.val, max_val)
         return left_is_valid and right_is_valid
+
+    def inOrder_iterative(self, root):
+        stack = collections.deque()
+        result = []
+        if root is None:
+            return result
+
+        # Start with root node
+        current_node = root
+
+        while True:
+            # Go left as far as possible and push nodes onto stack
+            while current_node is not None:
+                stack.appendleft(current_node)
+                current_node = current_node.left
+
+            if len(stack) == 0:
+                break
+
+            # Pop the top node from the stack and visit it
+            # [2,4,6] stack
+            current_node = stack.popleft()
+            result.append(current_node.val)
+            print(stack)
+
+            # Move to the right child if it exists
+            current_node = current_node.right
+        return result
+
+    def preOrder_iterative(self, root):
+        """
+        1. Initialize an empty stack and push the root node onto the stack.
+        2. While the stack is not empty, pop the top node from the stack and visit it.
+        3. Push the right child of the current node onto the stack if it exists.
+        4. Push the left child of the current node onto the stack if it exists.
+
+        we push its right child (if it exists) onto the stack first and then its left child (if it exists).
+        This ensures that the left child of the current node is visited before its right child
+        """
+        stack = collections.deque()
+        result = []
+        if root is None:
+            return result
+
+        stack.appendleft(root)
+        while stack:
+            current_node = stack.popleft()
+            result.append(current_node.val)
+
+            if current_node.right:
+                stack.appendleft(current_node.right)
+
+            if current_node.left:
+                stack.appendleft(current_node.left)
+
+        return result
+
+    def postOrder_iterative(self, root):
+        """
+        1. Initialize an empty stack and push the root node onto the stack.
+        2. While the stack is not empty, pop the top node from the stack and add its value to the result list.
+        3. Push the left child of the current node onto the stack if it exists.
+        4. Push the right child of the current node onto the stack if it exists.
+        5. Reverse the result list to get the post-order traversal of the binary tree.
+
+        When we have visited all the nodes, the result list will contain the nodes in reverse order of a post-order traversal. 
+        Therefore, we need to reverse the result list to get the actual post-order traversal of the binary tree.
+        """
+        stack = collections.deque()
+        result = []
+        if root is None:
+            return result
+
+        stack.appendleft(root)
+
+        while stack:
+            node = stack.popleft()
+            result.append(node.val)
+
+            if node.left:
+                stack.appendleft(node.left)
+            if node.right:
+                stack.appendleft(node.right)
+
+        return result[::-1]
