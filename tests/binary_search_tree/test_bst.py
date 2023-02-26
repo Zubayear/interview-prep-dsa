@@ -145,3 +145,11 @@ def test_create_min_height_bst():
     node = bst.create_min_height_bst(data)
     res = bst.bfs(node)
     assert res == [[10], [2, 14], [1, 5, 13, 15], [7, 22]]
+
+
+def test_kth_largest(traversal_data):
+    bst = BST()
+    for n in traversal_data:
+        bst.insert_iter(n)
+    assert bst.kth_largest(bst.root, 3) == 8
+    assert bst.kth_largest(bst.root, 1) == 12

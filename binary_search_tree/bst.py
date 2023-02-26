@@ -295,7 +295,6 @@ class BST:
             # [2,4,6] stack
             current_node = stack.popleft()
             result.append(current_node.val)
-            print(stack)
 
             # Move to the right child if it exists
             current_node = current_node.right
@@ -372,6 +371,25 @@ class BST:
         node.right = self._create_min_height_bst(arr, mid + 1, end)
         return node
 
-    def find_bst_height(self, root):
+    def kth_largest(self, root, k):
+        """
+        reverse inOrder => right, visit, left
+        """
+        stack = collections.deque()
+        n = 0
         if root is None:
-            return 0
+            return -1
+        current_node = root
+        while True:
+            while current_node is not None:
+                # go all the way to right
+                stack.appendleft(current_node)
+                current_node = current_node.right
+            if len(stack) == 0:
+                break
+            current_node = stack.popleft()
+            n += 1
+            if n == k:
+                return current_node.val
+            current_node = current_node.left
+        return -1
