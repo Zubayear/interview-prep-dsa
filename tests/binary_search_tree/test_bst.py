@@ -137,3 +137,11 @@ def test_postOrder_iterative(traversal_data):
     for n in traversal_data:
         bst.insert_iter(n)
     assert bst.postOrder_iterative(bst.root) == [2, 5, 4, 8, 12, 9, 6]
+
+
+def test_create_min_height_bst():
+    bst = BST()
+    data = [1, 2, 5, 7, 10, 13, 14, 15, 22]
+    node = bst.create_min_height_bst(data)
+    res = bst.bfs(node)
+    assert res == [[10], [2, 14], [1, 5, 13, 15], [7, 22]]

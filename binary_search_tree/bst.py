@@ -53,9 +53,9 @@ class BST:
             # go to right
             return self._search(node.right, key)
 
-    def bfs(self):
+    def bfs(self, root):
         queue = collections.deque()
-        queue.append(self.root)
+        queue.append(root)
         res = []
         while queue:
             size = len(queue)
@@ -68,6 +68,7 @@ class BST:
                 if cur_node.right is not None:
                     queue.append(cur_node.right)
             res.append(tmp)
+        print(res)
         return res
 
     def search_iter(self, key):
@@ -356,3 +357,21 @@ class BST:
                 stack.appendleft(node.right)
 
         return result[::-1]
+
+    def create_min_height_bst(self, arr):
+        if arr is None or len(arr) == 0:
+            return None
+        return self._create_min_height_bst(arr, 0, len(arr) - 1)
+
+    def _create_min_height_bst(self, arr, start, end):
+        if start > end:
+            return None
+        mid = (start + end) // 2
+        node = Node(arr[mid])
+        node.left = self._create_min_height_bst(arr, start, mid - 1)
+        node.right = self._create_min_height_bst(arr, mid + 1, end)
+        return node
+
+    def find_bst_height(self, root):
+        if root is None:
+            return 0
