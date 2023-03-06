@@ -393,3 +393,30 @@ class BST:
                 return current_node.val
             current_node = current_node.left
         return -1
+
+    # def reconstruct_bst(self, arr):
+    #     bst = BST()
+    #     return self._reconstruct_bst(arr, 0, len(arr) - 1)
+
+    def reconstruct_bst(self, arr):
+        """
+        1. Create an empty binary search tree.
+        2. If the given preorder traversal is empty, return the empty tree.
+        3. Otherwise, let the first element in the preorder traversal be the root of the tree.
+        4. Create a new node for the root with the given value and add it to the tree.
+        5. Find the index i of the first element in the preorder traversal that is greater than the root value (or the end of the list if there is no such element).
+        6. Recursively construct the left subtree by calling the algorithm on the sublist of the preorder traversal from the second element to the i-1th element (inclusive).
+        7. Recursively construct the right subtree by calling the algorithm on the sublist of the preorder traversal from the ith element to the end of the list.
+        8. Set the left and right subtrees of the root node to the roots of the left and right subtrees constructed in steps 6 and 7.
+        9. Return the root node of the BST.
+        """
+        if arr is None or len(arr) == 0:
+            return None
+        root = Node(arr[0])
+        # [8, 5, 1, 7, 10, 12]
+        idx = 1
+        while idx < len(arr) and arr[idx] < root.val:
+            idx += 1
+        root.left = self.reconstruct_bst(arr[1:idx])
+        root.right = self.reconstruct_bst(arr[idx:])
+        return root
