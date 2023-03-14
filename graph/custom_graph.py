@@ -9,6 +9,17 @@ class Graph:
     def __init__(self, vertices) -> None:
         self.graph = {node+1: [] for node in range(vertices)}
 
+    def __init__(self):
+        self.graph = {}
+
+    def addEdges(self, u, v):
+        if u not in self.graph:
+            self.graph[u] = []
+        if v not in self.graph:
+            self.graph[v] = []
+        self.graph[u].append(v)
+        self.graph[v].append(u)
+
     def add_edge(self, vertex1: int, vertex2: int) -> bool:
         """add two vertices
 

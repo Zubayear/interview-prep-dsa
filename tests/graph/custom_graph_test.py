@@ -1,4 +1,15 @@
+import pytest
+
 from graph.custom_graph import Graph
+
+
+@pytest.fixture()
+def graph_data():
+    g = Graph()
+    g.addEdges(1, 2)
+    g.addEdges(2, 3)
+    g.addEdges(3, 4)
+    return g
 
 
 def test_create_graph():
@@ -26,3 +37,8 @@ def test_create_graph():
     }
     actual = Graph.topological_sort(digraph)
     assert actual == [0, 5, 2, 3, 1, 4]
+
+
+def test_print_graph(graph_data):
+    gd = graph_data
+    gd.print_graph()
