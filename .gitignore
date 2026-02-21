@@ -1,6 +1,5 @@
 .pytest_cache
 hennge_codetest.py
-.pytest_cache
 algo_expert/__pycache__
 ds_impl/__pycache__
 dynamic_programming/__pycache__
@@ -15,3 +14,5 @@ tests/trie/__pycache__
 bin
 lib
 pyvenv.cfg
+.idea
+.venv
