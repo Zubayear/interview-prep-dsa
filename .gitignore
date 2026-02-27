@@ -16,3 +16,4 @@ lib
 pyvenv.cfg
 .idea
 .venv
+recursions/__pycache__
