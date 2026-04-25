@@ -1,4 +1,4 @@
-from algo_expert.validate_subsequence import is_valid_sequence
+from patterns.arrays_hashing.validate_subsequence import is_valid_sequence
 
 def test_is_valid_sequence():
     assert is_valid_sequence([5, 1, 22, 25, 6, -1, -18, 10], [1, 6, -1, 10]) == True

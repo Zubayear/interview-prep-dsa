@@ -1,8 +1,8 @@
-from graph.numIsland import numIslands
+from patterns.graph.num_island import num_islands
 
-def test_numIsland():
+def test_num_island():
     grid = [
         ["1", "0"],
         ["0", "1"]
     ]
-    assert numIslands(grid) == 2
+    assert num_islands(grid) == 2

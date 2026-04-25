@@ -1,4 +1,7 @@
 .pytest_cache
+.DS_Store
+*.pyc
+**/__pycache__/
 hennge_codetest.py
 algo_expert/__pycache__
 ds_impl/__pycache__

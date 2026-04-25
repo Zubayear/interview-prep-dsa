@@ -1,4 +1,4 @@
-from graph.number_of_provinces import find_circle_num
+from patterns.graph.number_of_provinces import find_circle_num
 
 
 def test_find_circle_num():

@@ -1,14 +1,14 @@
 import pytest
 
-from graph.custom_graph import Graph
+from patterns.graph.custom_graph import Graph
 
 
 @pytest.fixture()
 def graph_data():
     g = Graph()
-    g.addEdges(1, 2)
-    g.addEdges(2, 3)
-    g.addEdges(3, 4)
+    g.add_edges(1, 2)
+    g.add_edges(2, 3)
+    g.add_edges(3, 4)
     return g
 
 

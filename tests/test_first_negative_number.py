@@ -1,4 +1,4 @@
-from sliding_window.first_negative_number import first_neg_number
+from patterns.sliding_window.first_negative_number import first_neg_number
 
 def test_first_neg_number():
     assert first_neg_number([-8,2,3,-6,10], 2) == [-8,0,-6,-6]

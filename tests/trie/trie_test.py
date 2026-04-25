@@ -1,6 +1,6 @@
 import pytest
 
-from trie.Trie import Trie
+from structures.trie import Trie
 
 
 @pytest.fixture()

@@ -1,23 +1,21 @@
-from graph.travarse import Graph
+from patterns.graph.traversal import Graph
+
 
 def test_print_graph():
     g = Graph()
-    g.addVertex(0)
-    g.addVertex(1)
-    g.addVertex(2)
-    g.addVertex(3)
-    g.addVertex(4)
-    g.addVertex(5)
-    g.addVertex(6)
-    g.addEdge(0,1)
-    g.addEdge(0,4)
-    g.addEdge(1,2)
-    g.addEdge(2,3)
-    g.addEdge(3,4)
-    g.addEdge(3,5)
-    g.addEdge(5,6)
-    # g.printGraph()
-
-    res = g.dfs(0)
-    print(res)
-
+    g.add_vertex(0)
+    g.add_vertex(1)
+    g.add_vertex(2)
+    g.add_vertex(3)
+    g.add_vertex(4)
+    g.add_vertex(5)
+    g.add_vertex(6)
+    g.add_edge(0,1)
+    g.add_edge(0,4)
+    g.add_edge(1,2)
+    g.add_edge(2,3)
+    g.add_edge(3,4)
+    g.add_edge(3,5)
+    g.add_edge(5,6)
+    assert g.bfs(0) == [0, 1, 4, 2, 3, 5, 6]
+    assert g.dfs(0) == [0, 4, 3, 5, 6, 2, 1]
