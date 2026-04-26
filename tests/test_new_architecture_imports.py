@@ -1,10 +1,10 @@
-from patterns.dp import Solution
-from patterns.graph.traversal import Graph as TraversalGraph
-from patterns.sliding_window.find_maximum_in_sliding_window import (
+from src.algorithms.dynamic_programming import Solution
+from src.data_structures.graphs import Graph as TraversalGraph
+from src.problems.sliding_window.find_maximum_in_sliding_window import (
     find_max_sliding_window,
 )
-from structures.stack import Stack
-from structures.tree import BST
+from src.data_structures.linear import Stack
+from src.data_structures.trees import BST
 
 
 def test_canonical_packages_import():

@@ -1,0 +1,25 @@
+def count_anagram_occurances(pat, txt):
+    k = len(pat)
+    pat_freq = {}
+
+    for i in pat:
+        pat_freq[i] = pat_freq.get(i, 0) + 1
+    l, r, count, res = 0, 0, len(pat_freq), []
+
+    while r < len(txt):
+        if txt[r] in pat_freq:
+            pat_freq[txt[r]] -= 1
+            if pat_freq[txt[r]] == 0:
+                count -= 1
+        if r - l + 1 < k:
+            r += 1
+        elif r - l + 1 == k:
+            if count == 0:
+                res.append(l)
+            if txt[l] in pat_freq:
+                pat_freq[txt[l]] += 1
+                if pat_freq[txt[l]] > 0:
+                    count += 1
+            r += 1
+            l += 1
+    return res
